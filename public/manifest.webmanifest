@@ -1,0 +1,10 @@
+{
+  "name": "Bản đồ thiện nguyện",
+  "short_name": "Thiện nguyện",
+  "lang": "vi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfaf6",
+  "theme_color": "#fbfaf6",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
