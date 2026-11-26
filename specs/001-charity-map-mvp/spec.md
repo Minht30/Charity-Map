@@ -4,140 +4,173 @@
 
 **Created**: 2026-11-26
 
-**Status**: Draft (bản nháp, nhiều điểm là phỏng đoán, chờ Marshall xác nhận)
+**Status**: Draft (v2, cập nhật theo tổng quan của Marshall ngày 2026-11-26)
 
-**Input**: User description: "Bản đồ các tổ chức thiện nguyện / tình nguyện, có thể lấy dữ liệu từ các trang Facebook công khai."
+**Input**: User description: "Một bản đồ giống Google Maps, bắt đầu ở TP.HCM và vùng lân cận. Mở bản
+đồ là thấy quanh mình có hoàn cảnh nào cần giúp và cần giúp gì: cụ già vẫn đi bán hàng, cửa hàng do
+người khuyết tật làm, người vô gia cư, điểm quyên góp đồ ăn, nhà có thể ghé thăm trò chuyện. Không
+phải chuyện tiền, mà để người trẻ và những người có điều kiện biết tới và giúp. Ai cũng thêm được địa
+điểm mới, chọn danh mục và gắn link bài viết/reel Facebook kể về hoàn cảnh đó."
 
 ## User Scenarios & Testing *(mandatory)*
 
-### User Story 1 - Tìm tổ chức thiện nguyện gần mình trên bản đồ (Priority: P1)
+### User Story 1 - Mở bản đồ, thấy hoàn cảnh cần giúp quanh mình (Priority: P1)
 
-Một người muốn quyên góp hoặc đi tình nguyện mở trang web trên điện thoại, thấy bản đồ các tổ
-chức quanh vị trí của mình (hoặc tỉnh/thành mình chọn), lọc theo lĩnh vực (trẻ em, người già,
-môi trường, cứu trợ thiên tai, y tế...) và bấm vào một điểm để xem thông tin tổ chức.
+Một bạn trẻ ở TP.HCM mở trang trên điện thoại, bản đồ căn vào vị trí của bạn và hiện các điểm cần
+giúp gần đó, mỗi điểm có biểu tượng theo danh mục. Bạn lọc "Cụ già bán hàng", bấm vào một điểm và
+thấy: ai, đang bán gì hoặc cần gì, cách giúp (mua hàng, mang đồ ăn, ghé trò chuyện...), giờ thường
+có mặt, và bài/reel Facebook kể về hoàn cảnh này.
 
-**Why this priority**: Đây là giá trị cốt lõi của sản phẩm; chỉ riêng tính năng này với dữ liệu
-nhập tay đã là một MVP dùng được.
+**Why this priority**: Đây là giá trị cốt lõi. Chỉ cần tính năng này với dữ liệu do nhóm nhập sẵn là
+đã có MVP dùng được.
 
-**Independent Test**: Nhập sẵn 20 tổ chức mẫu, mở bản đồ, lọc theo lĩnh vực và tỉnh, mở chi tiết
-một tổ chức và thấy đủ thông tin liên hệ.
+**Independent Test**: Nhập sẵn 30 điểm mẫu ở TP.HCM, mở bản đồ, lọc theo danh mục, mở chi tiết và thấy
+cách giúp cùng bài Facebook được nhúng.
 
 **Acceptance Scenarios**:
 
-1. **Given** người dùng cho phép truy cập vị trí, **When** mở trang, **Then** bản đồ căn giữa
-   vào vị trí đó và hiển thị các tổ chức trong khu vực.
-2. **Given** người dùng từ chối vị trí, **When** mở trang, **Then** bản đồ hiển thị toàn quốc và
-   cho phép chọn tỉnh/thành.
-3. **Given** bản đồ đang hiển thị, **When** chọn lĩnh vực "Trẻ em", **Then** chỉ các tổ chức thuộc
-   lĩnh vực đó còn hiển thị.
-4. **Given** bấm vào một điểm, **When** mở chi tiết, **Then** thấy tên, mô tả ngắn, lĩnh vực, khu
-   vực hoạt động, kênh liên hệ chính thức, link nguồn, ngày cập nhật và trạng thái xác minh.
+1. **Given** người dùng cho phép truy cập vị trí, **When** mở trang, **Then** bản đồ căn vào vị trí đó
+   và hiện các điểm đã duyệt trong bán kính có thể điều chỉnh (mặc định 3 km).
+2. **Given** người dùng từ chối vị trí, **When** mở trang, **Then** bản đồ hiện trung tâm TP.HCM và cho
+   phép chọn quận/huyện.
+3. **Given** bản đồ đang hiển thị, **When** chọn một hoặc nhiều danh mục, **Then** chỉ các điểm thuộc
+   danh mục đó còn hiện.
+4. **Given** bấm vào một điểm, **When** mở chi tiết, **Then** thấy tiêu đề, mô tả, danh mục, các cách
+   giúp, giờ có mặt (nếu có), bài/reel Facebook nhúng (nếu có), ngày xác nhận gần nhất và nút "Chỉ đường".
+5. **Given** điểm là người không có chỗ ở cố định, **When** hiển thị, **Then** chỉ hiện một vùng gần đúng
+   (tối thiểu bán kính 200 m), không hiện điểm chính xác.
 
 ---
 
-### User Story 2 - Tổ chức tự đăng ký và cập nhật thông tin (Priority: P2)
+### User Story 2 - Cộng đồng thêm địa điểm mới (Priority: P2)
 
-Một nhóm/tổ chức thiện nguyện điền form để đưa mình lên bản đồ (tên, lĩnh vực, khu vực, link
-trang Facebook/website, liên hệ). Quản trị viên duyệt trước khi hiển thị. Tổ chức có thể yêu cầu
-sửa hoặc gỡ thông tin.
+Một người đi đường gặp cụ bà bán vé số đã lớn tuổi, hỏi ý kiến cụ, rồi mở app, chọn "Thêm địa điểm",
+ghim vị trí, chọn danh mục, ghi cách giúp, dán link reel Facebook đã đăng về cụ, và tích xác nhận "Tôi
+đã hỏi và người này đồng ý". Bài vào hàng chờ; người kiểm duyệt xem xét rồi duyệt.
 
-**Why this priority**: Giúp dữ liệu tăng lên mà không phụ thuộc vào quản trị viên nhập tay, và
-đáp ứng nguyên tắc tổ chức được quyền sửa/gỡ thông tin.
+**Why this priority**: Dữ liệu tăng nhờ cộng đồng; đây là cách sản phẩm phủ được nhiều nơi.
 
-**Independent Test**: Gửi form đăng ký, quản trị viên duyệt, tổ chức xuất hiện trên bản đồ; gửi
-yêu cầu gỡ và tổ chức biến mất sau khi duyệt.
+**Independent Test**: Đăng nhập, gửi một địa điểm có link Facebook, kiểm duyệt viên duyệt, điểm xuất hiện
+trên bản đồ; gửi một địa điểm không tích xác nhận đồng ý thì không gửi được.
 
 **Acceptance Scenarios**:
 
-1. **Given** form đăng ký, **When** tổ chức gửi đủ trường bắt buộc, **Then** bản ghi vào hàng chờ
-   duyệt và chưa hiển thị công khai.
-2. **Given** bản ghi chờ duyệt, **When** quản trị viên duyệt, **Then** tổ chức xuất hiện trên bản đồ.
-3. **Given** tổ chức đã hiển thị, **When** gửi yêu cầu gỡ, **Then** quản trị viên nhận được yêu cầu
-   và có thể gỡ trong một thao tác.
+1. **Given** người dùng chưa đăng nhập, **When** bấm "Thêm địa điểm", **Then** được yêu cầu đăng nhập.
+2. **Given** form thêm địa điểm, **When** gửi đủ trường bắt buộc (vị trí, danh mục, mô tả, ít nhất một
+   cách giúp, xác nhận đồng ý), **Then** bài vào hàng chờ và chưa hiện công khai.
+3. **Given** người dùng dán link bài/reel Facebook công khai, **When** gửi, **Then** link được kiểm tra
+   có xem trước được không và được nhúng ở trang chi tiết sau khi duyệt.
+4. **Given** bài trong hàng chờ, **When** kiểm duyệt viên duyệt hoặc từ chối kèm lý do, **Then** người đăng
+   được báo kết quả.
+5. **Given** điểm đã hiển thị, **When** người đăng hoặc người khác xác nhận "vẫn còn ở đây", **Then** ngày
+   xác nhận gần nhất được cập nhật.
 
 ---
 
-### User Story 3 - Lấy thông tin từ trang Facebook công khai của tổ chức (Priority: P3) *(phỏng đoán)*
+### User Story 3 - Báo cáo, gỡ bài và bảo vệ người được giới thiệu (Priority: P2)
 
-Khi một tổ chức có trang Facebook công khai, hệ thống tự điền hoặc định kỳ làm mới thông tin cơ bản
-(tên, ảnh đại diện, mô tả, địa chỉ, bài đăng gần nhất về hoạt động/kêu gọi) từ trang đó, qua kênh
-được Meta cho phép.
+Người được giới thiệu, người thân, hoặc bất kỳ ai cũng có thể báo cáo một điểm: "người này không đồng ý",
+"sai thông tin", "nghi lừa đảo", "không còn ở đây". Báo cáo "không đồng ý" làm điểm bị ẩn ngay.
 
-**Why this priority**: Giảm công nhập liệu và giữ dữ liệu "sống", nhưng phụ thuộc vào việc Meta
-duyệt quyền truy cập nên không nên chặn MVP.
+**Why this priority**: Bắt buộc theo nguyên tắc II của hiến chương; không phát hành công khai nếu thiếu.
 
-**Independent Test**: Với một trang Facebook đã được cấp quyền, nhập link trang và thấy các trường
-được điền sẵn kèm nguồn và thời điểm lấy.
+**Independent Test**: Báo cáo "không đồng ý" mà không cần đăng nhập, điểm biến mất khỏi bản đồ ngay và vào
+hàng chờ xem xét.
 
 **Acceptance Scenarios**:
 
-1. **Given** một link trang Facebook hợp lệ và có quyền truy cập, **When** quản trị viên/tổ chức
-   nhập link, **Then** các trường cơ bản được điền sẵn để người dùng xác nhận.
-2. **Given** không lấy được dữ liệu (không có quyền, trang bị xoá), **When** làm mới, **Then** bản
-   ghi giữ dữ liệu cũ, được đánh dấu "không làm mới được" và không bị xoá tự động.
+1. **Given** trang chi tiết một điểm, **When** chọn "Người này không đồng ý / Gỡ bài", **Then** điểm bị ẩn
+   ngay, không cần đăng nhập, và kiểm duyệt viên nhận được yêu cầu.
+2. **Given** báo cáo loại khác, **When** gửi, **Then** điểm vẫn hiện nhưng vào hàng chờ xem xét; nếu có từ
+   3 báo cáo độc lập, điểm tạm ẩn.
+3. **Given** điểm không được xác nhận lại trong 90 ngày, **When** hiển thị, **Then** có nhãn "có thể đã thay
+   đổi"; sau 180 ngày, điểm tự ẩn.
+
+---
+
+### User Story 4 - Tổ chức/nhóm thiện nguyện đăng điểm và hoạt động (Priority: P3)
+
+Một nhóm thiện nguyện có trang Facebook đăng điểm phát cơm, tủ quần áo miễn phí, hoặc lịch thăm nhà
+các cụ, kèm link bài Facebook của nhóm. Nhóm có hồ sơ riêng và các điểm của nhóm hiện huy hiệu "nhóm đã
+xác minh" sau khi được duyệt.
+
+**Why this priority**: Tăng độ tin cậy và số lượng điểm, nhưng không chặn MVP.
+
+**Independent Test**: Tạo hồ sơ nhóm, được duyệt, đăng một điểm và thấy huy hiệu trên trang chi tiết.
+
+**Acceptance Scenarios**:
+
+1. **Given** một nhóm được duyệt, **When** đăng điểm, **Then** điểm hiện huy hiệu nhóm và link tới trang
+   Facebook của nhóm.
 
 ---
 
 ### Edge Cases
 
-- Một tổ chức hoạt động ở nhiều tỉnh hoặc không có địa chỉ cố định (nhóm online, đoàn cứu trợ lưu
-  động): hiển thị theo khu vực hoạt động thay vì một điểm duy nhất.
-- Trùng lặp: cùng một tổ chức được đăng ký hai lần, hoặc vừa đăng ký vừa có từ Facebook.
-- Tổ chức có dấu hiệu lừa đảo bị báo cáo: cần cơ chế báo cáo và tạm ẩn.
-- Khu vực có quá nhiều điểm: gom cụm (cluster) để bản đồ vẫn đọc được.
-- Dữ liệu cũ hơn 12 tháng: đánh dấu "có thể không còn hoạt động".
+- Người bán hàng rong di chuyển theo giờ: cho phép nhiều khung giờ/vị trí hoặc chỉ một vùng hoạt động.
+- Trùng lặp: hai người cùng đăng một cụ bán hàng; hệ thống gợi ý điểm có sẵn ở gần khi đăng.
+- Link Facebook bị xoá, chuyển riêng tư hoặc không nhúng được: trang chi tiết vẫn hiện, ẩn phần nhúng.
+- Ảnh/bài có trẻ em hoặc giấy tờ tùy thân: kiểm duyệt viên từ chối hoặc yêu cầu sửa.
+- Nhiều điểm sát nhau: gom cụm để bản đồ vẫn đọc được.
+- Người dùng ở ngoài TP.HCM và vùng lân cận: bản đồ vẫn mở được nhưng báo khu vực chưa có nhiều dữ liệu.
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
-- **FR-001**: Hệ thống PHẢI hiển thị bản đồ các tổ chức đã được duyệt, kèm gom cụm khi nhiều điểm.
-- **FR-002**: Người dùng PHẢI lọc được theo lĩnh vực và theo tỉnh/thành, và tìm theo tên.
-- **FR-003**: Mỗi tổ chức PHẢI có trang chi tiết với thông tin liên hệ chính thức, link nguồn, ngày
-  cập nhật và trạng thái xác minh.
-- **FR-004**: Tổ chức PHẢI tự đăng ký được qua form; bản ghi mới PHẢI qua duyệt trước khi hiển thị.
-- **FR-005**: Quản trị viên PHẢI thêm, sửa, duyệt, ẩn và gỡ được bản ghi.
-- **FR-006**: Người dùng PHẢI báo cáo được một tổ chức (thông tin sai, nghi lừa đảo, ngừng hoạt động).
-- **FR-007**: Tổ chức PHẢI gửi được yêu cầu sửa hoặc gỡ thông tin của mình.
-- **FR-008**: Hệ thống PHẢI lưu nguồn, URL gốc, thời điểm lấy và trạng thái xác minh cho mỗi bản ghi.
-- **FR-009**: Hệ thống PHẢI dùng được tốt trên điện thoại và có giao diện tiếng Việt.
-- **FR-010**: Hệ thống NÊN lấy thông tin từ trang Facebook công khai chỉ qua kênh được Meta cho phép
-  [NEEDS CLARIFICATION: Dùng Graph API (cần Meta duyệt ứng dụng, mất thời gian) hay chỉ lưu link
-  Facebook và để tổ chức/quản trị viên tự điền ở MVP?]
-- **FR-011**: Phạm vi địa lý ban đầu là [NEEDS CLARIFICATION: toàn Việt Nam, hay bắt đầu với một
-  thành phố/tỉnh cụ thể?]
-- **FR-012**: Đối tượng chính là [NEEDS CLARIFICATION: người muốn quyên góp/tình nguyện, người cần
-  được hỗ trợ tìm nơi giúp đỡ, hay cả hai? Ảnh hưởng tới nội dung trang chi tiết và cách lọc.]
+- **FR-001**: Hệ thống PHẢI hiển thị bản đồ các điểm đã duyệt quanh vị trí người dùng, có gom cụm.
+- **FR-002**: Người dùng PHẢI lọc được theo danh mục và tìm theo khu vực (quận/huyện). Danh mục ban đầu:
+  cụ già/người lớn tuổi bán hàng, cửa hàng do người khuyết tật làm, người vô gia cư, điểm phát đồ ăn/quyên
+  góp đồ, nhà có thể ghé thăm, khác. Quản trị viên quản lý được danh sách này.
+- **FR-003**: Mỗi điểm PHẢI có ít nhất một "cách giúp" ngoài tiền (mua hàng, mang đồ ăn, đồ dùng, ghé thăm
+  trò chuyện, chia sẻ, góp công). Hệ thống KHÔNG nhận hay chuyển tiền.
+- **FR-004**: Trang chi tiết PHẢI hiện bài/reel Facebook công khai được gắn link (nhúng nếu có thể, nếu không
+  thì hiện link), cùng nút chỉ đường mở ứng dụng bản đồ của điện thoại.
+- **FR-005**: Người xem KHÔNG cần đăng nhập. Người đăng địa điểm PHẢI đăng nhập.
+- **FR-006**: Form đăng PHẢI bắt buộc xác nhận đã được người được giới thiệu đồng ý.
+- **FR-007**: Mọi bài cộng đồng PHẢI qua kiểm duyệt trước khi hiển thị; kiểm duyệt viên duyệt, từ chối kèm lý
+  do, sửa, ẩn hoặc gỡ được.
+- **FR-008**: Vị trí của danh mục "người vô gia cư" (và mọi điểm được đánh dấu "không cố định") PHẢI được làm
+  mờ tối thiểu 200 m; vị trí chính xác chỉ kiểm duyệt viên thấy.
+- **FR-009**: Bất kỳ ai cũng PHẢI báo cáo được một điểm; báo cáo "không đồng ý" PHẢI ẩn điểm ngay.
+- **FR-010**: Điểm không được xác nhận lại sau 90 ngày PHẢI có nhãn cảnh báo; sau 180 ngày PHẢI tự ẩn.
+- **FR-011**: Giao diện PHẢI tiếng Việt và dùng tốt trên điện thoại.
+- **FR-012**: Dữ liệu từ Facebook PHẢI lấy theo cách [NEEDS CLARIFICATION: (A) người dùng dán link, hệ thống
+  nhúng bài/reel công khai bằng công cụ nhúng chính thức của Meta — đề xuất cho MVP; hay (B) xin Meta duyệt quyền
+  Graph API để tự đọc bài từ một danh sách trang thiện nguyện; hay cả hai, B làm sau?]
+- **FR-013**: Cách đăng nhập cho người đăng là [NEEDS CLARIFICATION: đăng nhập bằng Facebook, Google, số điện
+  thoại (OTP), hay kết hợp?]
 
 ### Key Entities *(include if feature involves data)*
 
-- **Tổ chức (Organization)**: tên, mô tả ngắn, lĩnh vực (nhiều), khu vực hoạt động, vị trí (điểm
-  hoặc vùng), kênh liên hệ chính thức, link Facebook/website, trạng thái (chờ duyệt / hiển thị /
-  ẩn / gỡ), trạng thái xác minh, ngày cập nhật.
-- **Nguồn dữ liệu (Source Record)**: loại nguồn (tự đăng ký, nhập tay, Facebook), URL gốc, thời điểm
-  lấy, dữ liệu thô; thuộc về một Tổ chức.
-- **Lĩnh vực (Category)**: danh mục cố định do quản trị viên quản lý.
-- **Báo cáo / Yêu cầu (Report)**: loại (sai thông tin, nghi lừa đảo, yêu cầu gỡ/sửa), nội dung, trạng
-  thái xử lý; thuộc về một Tổ chức.
-- **Quản trị viên (Admin)**: người được quyền duyệt và chỉnh sửa.
+- **Hoàn cảnh / Địa điểm (Place)**: tiêu đề, mô tả, danh mục, các cách giúp, giờ có mặt, vị trí (chính xác,
+  chỉ kiểm duyệt viên thấy) và vị trí hiển thị (có thể đã làm mờ), loại vị trí (cố định / không cố định),
+  trạng thái (chờ duyệt / hiển thị / ẩn / gỡ), ngày xác nhận gần nhất, người đăng, nhóm (nếu có).
+- **Link nguồn (Source Link)**: URL bài/reel Facebook hoặc link khác, đã nhúng được hay chưa, thời điểm kiểm tra;
+  thuộc về một Địa điểm.
+- **Danh mục (Category)**: tên, biểu tượng; quản trị viên quản lý.
+- **Người dùng (User)**: người đăng, kiểm duyệt viên, quản trị viên; lịch sử đăng và vi phạm.
+- **Nhóm thiện nguyện (Group)**: tên, trang Facebook, trạng thái xác minh; có nhiều Địa điểm.
+- **Báo cáo (Report)**: loại (không đồng ý, sai thông tin, nghi lừa đảo, không còn ở đây), nội dung, trạng thái
+  xử lý; thuộc về một Địa điểm.
 
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
 
-- **SC-001**: Người dùng mới tìm được ít nhất một tổ chức phù hợp trong khu vực của mình trong
-  dưới 1 phút kể từ khi mở trang.
-- **SC-002**: Trang bản đồ đầu tiên hiển thị dưới 3 giây trên mạng 4G trung bình.
-- **SC-003**: Có ít nhất 100 tổ chức đã duyệt trên bản đồ trong 3 tháng đầu.
-- **SC-004**: 100% tổ chức hiển thị có link nguồn và ngày cập nhật.
-- **SC-005**: Yêu cầu gỡ thông tin được xử lý trong vòng 7 ngày.
+- **SC-001**: Người dùng mới thấy ít nhất một hoàn cảnh gần mình và biết cách giúp trong dưới 1 phút.
+- **SC-002**: Bản đồ hiện điểm quanh người dùng trong dưới 3 giây trên mạng 4G trung bình.
+- **SC-003**: Có ít nhất 200 điểm đã duyệt ở TP.HCM và vùng lân cận trong 3 tháng đầu.
+- **SC-004**: Báo cáo "không đồng ý" làm điểm biến mất khỏi bản đồ trong vòng 1 phút, 100% trường hợp.
+- **SC-005**: Bài cộng đồng được duyệt hoặc từ chối trong vòng 48 giờ.
+- **SC-006**: 0 điểm thuộc danh mục người vô gia cư hiển thị vị trí chính xác.
 
 ## Assumptions
 
-- (Phỏng đoán) Người dùng chủ yếu ở Việt Nam, truy cập bằng điện thoại, giao diện tiếng Việt.
-- (Phỏng đoán) MVP là ứng dụng web, không có app di động riêng.
-- (Phỏng đoán) Người xem bản đồ không cần đăng nhập; chỉ quản trị viên đăng nhập.
-- (Phỏng đoán) Không xử lý quyên góp/thanh toán trong sản phẩm; chỉ dẫn link tới kênh chính thức
-  của tổ chức.
-- Tính năng Facebook phụ thuộc vào chính sách và quy trình duyệt ứng dụng của Meta; MVP vẫn
-  hoạt động đầy đủ nếu chưa có quyền này.
+- Phạm vi ban đầu là TP.HCM và các tỉnh lân cận (theo Marshall).
+- Người dùng chính: người trẻ và những người có điều kiện giúp đỡ; không phải nền tảng gây quỹ.
+- (Phỏng đoán) MVP là web app chạy tốt trên điện thoại, chưa có app di động riêng.
+- (Phỏng đoán) Ban đầu nhóm dự án là kiểm duyệt viên; chưa cần hệ thống kiểm duyệt viên tình nguyện.
+- Không dùng "tài khoản Facebook tin cậy" để tự động đọc trang, vì vi phạm điều khoản Meta (hiến chương,
+  nguyên tắc III). Danh sách trang Facebook Marshall gửi sau sẽ dùng làm dữ liệu khởi đầu qua nhập tay + nhúng link.
+- Nhúng bài/reel Facebook phụ thuộc vào công cụ nhúng của Meta và việc bài đó còn công khai.

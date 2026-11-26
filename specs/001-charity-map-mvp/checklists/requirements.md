@@ -31,7 +31,7 @@
 
 ## Notes
 
-- Còn 3 điểm [NEEDS CLARIFICATION] (FR-010 nguồn Facebook, FR-011 phạm vi địa lý, FR-012 đối tượng
-  chính). Cần trả lời trước `/speckit-plan`, có thể qua `/speckit-clarify`.
-- FR-010 nhắc tới "Meta Graph API" như một ràng buộc chính sách của nguồn dữ liệu, không phải lựa
+- Còn 2 điểm [NEEDS CLARIFICATION] (FR-012 cách lấy dữ liệu Facebook, FR-013 cách đăng nhập). Cần trả lời
+  trước `/speckit-plan`, có thể qua `/speckit-clarify`.
+- FR-012 nhắc tới "Meta Graph API" như một ràng buộc chính sách của nguồn dữ liệu, không phải lựa
   chọn kỹ thuật.
