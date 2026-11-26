@@ -44,9 +44,16 @@ cách giúp cùng bài Facebook được nhúng.
 
 ### User Story 2 - Cộng đồng thêm địa điểm mới (Priority: P2)
 
-Một người đi đường gặp cụ bà bán vé số đã lớn tuổi, hỏi ý kiến cụ, rồi mở app, chọn "Thêm địa điểm",
-ghim vị trí, chọn danh mục, ghi cách giúp, dán link reel Facebook đã đăng về cụ, và tích xác nhận "Tôi
-đã hỏi và người này đồng ý". Bài vào hàng chờ; người kiểm duyệt xem xét rồi duyệt.
+Một người đi đường gặp cụ bà bán vé số đã lớn tuổi, hỏi ý kiến cụ, rồi bấm nút lớn "Thêm người cần giúp".
+Form chỉ có 3 bước, mỗi bước một màn hình:
+
+1. **Ở đâu?** Bấm "Tôi đang ở đây" (dùng vị trí điện thoại) hoặc kéo ghim trên bản đồ.
+2. **Ai, cần gì?** Chạm một ô hình lớn (bán vé số, cụ già bán hàng, vô gia cư...), chạm các cách giúp (mua
+   hàng, mang đồ ăn, ghé trò chuyện...), viết vài dòng nếu muốn.
+3. **Gửi.** Dán link reel nếu có (không bắt buộc), tích "Tôi đã hỏi và người này đồng ý", bấm Gửi.
+
+Chỉ tới lúc bấm Gửi mới cần đăng nhập Facebook/Google, và những gì đã điền vẫn được giữ lại. Bài vào hàng chờ;
+người kiểm duyệt xem xét rồi duyệt.
 
 **Why this priority**: Dữ liệu tăng nhờ cộng đồng; đây là cách sản phẩm phủ được nhiều nơi.
 
@@ -55,7 +62,8 @@ trên bản đồ; gửi một địa điểm không tích xác nhận đồng �
 
 **Acceptance Scenarios**:
 
-1. **Given** người dùng chưa đăng nhập, **When** bấm "Thêm địa điểm", **Then** được yêu cầu đăng nhập.
+1. **Given** người dùng chưa đăng nhập, **When** điền xong và bấm Gửi, **Then** được yêu cầu đăng nhập, và sau
+   khi đăng nhập bài được gửi luôn với nội dung đã điền, không phải điền lại.
 2. **Given** form thêm địa điểm, **When** gửi đủ trường bắt buộc (vị trí, danh mục, mô tả, ít nhất một
    cách giúp, xác nhận đồng ý), **Then** bài vào hàng chờ và chưa hiện công khai.
 3. **Given** người dùng dán link bài/reel Facebook công khai, **When** gửi, **Then** link được kiểm tra
@@ -167,6 +175,11 @@ kèm đoạn chữ làm bằng chứng; kiểm duyệt viên chấp nhận hoặ
 - **FR-013**: Người đăng PHẢI đăng nhập bằng Facebook hoặc Google.
 - **FR-014**: Hệ thống KHÔNG hiển thị số điện thoại, tài khoản ngân hàng hay kênh liên hệ trực tiếp của người
   được giới thiệu. Chỉ có vị trí, cách giúp và link bài viết/reel kể về hoàn cảnh.
+- **FR-016**: Xem bản đồ và thêm địa điểm PHẢI dùng được bởi người không rành công nghệ (kể cả người lớn tuổi):
+  form thêm địa điểm tối đa 3 bước; chỉ vị trí, danh mục, một cách giúp và ô xác nhận đồng ý là bắt buộc; chọn
+  bằng ô hình lớn thay vì danh sách thả xuống; chữ tiếng Việt đơn giản, không thuật ngữ; nút bấm đủ lớn cho ngón
+  tay (tối thiểu 44×44 px), chữ tối thiểu 16 px, tương phản đạt WCAG AA; mỗi lỗi nói rõ cần sửa gì bằng tiếng Việt;
+  bản nháp form được giữ lại nếu thoát giữa chừng hoặc mất mạng.
 - **FR-015** *(tuỳ chọn, mặc định tắt)*: Hệ thống CÓ THỂ gợi ý vị trí từ lời nói và chữ trên hình trong video,
   CHỈ với file video do chủ trang cung cấp hoặc cho phép. KHÔNG tự tải video từ Facebook. Gợi ý chỉ hiện cho
   kiểm duyệt viên, không bao giờ tự duyệt; file video và bản chép lời bị xoá sau khi xử lý xong, chỉ giữ đoạn
@@ -195,6 +208,8 @@ kèm đoạn chữ làm bằng chứng; kiểm duyệt viên chấp nhận hoặ
 - **SC-004**: Báo cáo "không đồng ý" làm điểm biến mất khỏi bản đồ trong vòng 1 phút, 100% trường hợp.
 - **SC-005**: Bài cộng đồng được duyệt hoặc từ chối trong vòng 48 giờ.
 - **SC-006**: 0 điểm thuộc danh mục người vô gia cư hiển thị vị trí chính xác.
+- **SC-008**: Trong buổi thử với ít nhất 5 người không rành công nghệ (có người trên 50 tuổi), ít nhất 4 người
+  tự thêm được một địa điểm trong dưới 2 phút mà không cần hỏi ai.
 - **SC-007**: 100% điểm hiển thị không chứa số điện thoại hay số tài khoản của người được giới thiệu.
 
 ## Assumptions

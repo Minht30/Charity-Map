@@ -119,6 +119,21 @@ public/
 bảo mật nằm trong `supabase/migrations`. Đây là cấu trúc đơn giản nhất mà vẫn đặt các quy tắc quyền riêng tư
 ở tầng database, nơi lỗi giao diện không vượt qua được.
 
+## Dễ dùng cho mọi người (FR-016, SC-008)
+
+Người dùng chính không rành công nghệ, nhiều người lớn tuổi, dùng điện thoại ngoài đường. Thiết kế:
+
+- **Trang đầu chỉ có bản đồ** và một nút lớn "Thêm người cần giúp". Bộ lọc là một hàng ô hình danh mục cuộn ngang.
+- **Form 3 bước**, mỗi bước một màn hình, có thanh tiến độ "Bước 1/3". Chỉ 4 thứ bắt buộc: vị trí, danh mục, một
+  cách giúp, xác nhận đồng ý. Giờ, mô tả, link reel nằm trong "Thêm thông tin (không bắt buộc)".
+- **Đăng nhập muộn**: chỉ hỏi khi bấm Gửi; bản nháp lưu trong trình duyệt nên không mất khi đăng nhập hay mất mạng.
+- **Chữ**: tiếng Việt đơn giản, tập trung trong `lib/i18n/vi.ts`; không dùng từ như "submit", "category", "pending"
+  ("Đang chờ duyệt" thay cho "pending").
+- **Tiếp cận**: nút ≥ 44 px, chữ ≥ 16 px, tương phản WCAG AA, kiểm bằng axe trong Playwright.
+- **Thử với người thật** (T049a) trước khi phát hành.
+
+Constitution check: phù hợp nguyên tắc V (mobile-first, tiếng Việt) và VII (đơn giản).
+
 ## Optional: gợi ý vị trí từ video (FR-015, US5)
 
 Đây là công cụ nhập dữ liệu cho quản trị viên/Claude khi tự tìm địa điểm từ các trang nguồn, không nằm trong form

@@ -77,7 +77,9 @@ test end-to-end cho các luồng chính.
 - [ ] T030 [US2] `POST /api/oembed/check` trong `app/api/oembed/route.ts`
 - [ ] T031 [US2] `POST /api/places` trong `app/api/places/route.ts`: kiểm `places.consent_confirmed`, ≥1 `place_help_types.help_type`, chặn nội dung từ T016, gợi ý trùng lặp (100 m + `pg_trgm`), tạo bài `pending`
 - [ ] T032 [P] [US2] Trigger: điểm `published` phải có ≥1 cách giúp; người có `users.posting_blocked_until` không đăng được, trong `supabase/migrations/0006_publish_rules.sql`
-- [ ] T033 [US2] Form thêm địa điểm: ghim trên bản đồ, ô tìm địa chỉ (VietMap hoặc Goong), danh mục, cách giúp, giờ, link reel có xem trước, ô tích đồng ý, trong `app/them-dia-diem/page.tsx` và `components/forms/PlaceForm.tsx`
+- [ ] T033 [US2] Form thêm địa điểm 3 bước theo FR-016 (Ở đâu? → Ai, cần gì? → Gửi): nút "Tôi đang ở đây", ô hình lớn cho danh mục và cách giúp, trường tuỳ chọn (giờ, mô tả, link reel) thu gọn, đăng nhập chỉ ở bước Gửi, lưu nháp vào trình duyệt, trong `app/them-dia-diem/page.tsx` và `components/forms/PlaceForm/` (mỗi bước một file)
+- [ ] T033a [P] [US2] Bộ chữ tiếng Việt đơn giản cho toàn bộ giao diện và thông báo lỗi, tập trung một chỗ trong `lib/i18n/vi.ts`
+- [ ] T033b [P] [US2] Kiểm tra tiếp cận tự động (axe) cho bản đồ và form, kích thước nút ≥ 44 px, chữ ≥ 16 px, trong `tests/e2e/accessibility.spec.ts`
 - [ ] T034 [P] [US2] Chọn VietMap hay Goong: thử 20 địa chỉ TP.HCM mẫu, ghi kết quả vào research.md, viết `lib/geo/geocode.ts`
 - [ ] T035 [US2] Hàng chờ kiểm duyệt (xem `location_exact`, nguồn, cờ từ T016) và `POST /api/moderation/[id]` ghi `moderation_log`, trong `app/kiem-duyet/page.tsx` và `app/api/moderation/[id]/route.ts`
 - [ ] T036 [US2] `POST /api/places/[id]/confirm` ("vẫn còn ở đây") trong `app/api/places/[id]/confirm/route.ts`
@@ -137,6 +139,8 @@ Bỏ cả phase này thì MVP vẫn chạy đầy đủ.
 ## Phase 9: Polish
 
 - [ ] T049 [P] *(Tuỳ chọn, Marshall quyết định sau; MVP chạy đầy đủ khi bỏ task này)* AI gợi ý điền form sau cờ `AI_SUGGEST_ENABLED` (mặc định tắt) theo contracts/ai-extract.md, trong `lib/ai/suggest.ts` và `app/api/ai/suggest/route.ts`
+- [ ] T049a Buổi thử với ít nhất 5 người không rành công nghệ (có người trên 50 tuổi): thêm một địa điểm và tìm một
+  hoàn cảnh gần mình; ghi kết quả và chỗ vướng vào `specs/001-charity-map-mvp/usability-test.md`, sửa trước khi phát hành (SC-008)
 - [ ] T050 [P] Ghi công © OpenStreetMap, trang "Về dự án" và chính sách quyền riêng tư tiếng Việt trong `app/(public)/gioi-thieu/page.tsx`
 - [ ] T051 Chạy toàn bộ quickstart.md và sửa các lệnh sai
 
