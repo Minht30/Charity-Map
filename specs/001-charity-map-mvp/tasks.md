@@ -121,7 +121,8 @@ test end-to-end cho các luồng chính.
 
 ## Phase 8: User Story 5 — Gợi ý vị trí từ video (P3, tuỳ chọn, mặc định tắt)
 
-**Goal**: từ file video chủ trang cung cấp, gợi ý ghim kèm bằng chứng cho kiểm duyệt viên.
+**Goal**: công cụ nhập dữ liệu cho quản trị/Claude (không thuộc form công khai): từ file video chủ trang cung cấp,
+gợi ý ghim kèm bằng chứng cho kiểm duyệt viên.
 Bỏ cả phase này thì MVP vẫn chạy đầy đủ.
 
 - [ ] T052 [US5] Bảng `location_suggestions` theo data-model.md (`location_suggestions.evidence_text`, `location_suggestions.video_source`) và RLS chỉ cho kiểm duyệt viên, trong `supabase/migrations/0009_location_suggestions.sql`

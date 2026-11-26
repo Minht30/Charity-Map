@@ -107,6 +107,9 @@ xác minh" sau khi được duyệt.
 
 ### User Story 5 - Gợi ý vị trí từ nội dung video (Priority: P3, tuỳ chọn, mặc định tắt)
 
+Đây là **công cụ nhập dữ liệu cho quản trị/Claude** khi tự tìm và nhập hàng loạt địa điểm từ các trang nguồn.
+Form công khai cho người dùng vẫn là form điền tay đơn giản, không có bước này.
+
 Trong reel, vị trí thường chỉ được nói ra ("cô ngồi ở góc đường A và B") hoặc hiện trên biển hiệu, không có
 trong caption. Khi một trang hợp tác (ví dụ Tôn Hoa Sen) gửi file video gốc hoặc cho phép dùng video của họ,
 hệ thống chuyển lời nói thành chữ, đọc chữ trên vài khung hình (biển tên đường, biển cửa hàng), rồi gợi ý một

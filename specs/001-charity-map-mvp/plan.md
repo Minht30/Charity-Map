@@ -121,7 +121,8 @@ bảo mật nằm trong `supabase/migrations`. Đây là cấu trúc đơn giả
 
 ## Optional: gợi ý vị trí từ video (FR-015, US5)
 
-Mặc định tắt (`LOCATION_SUGGEST_ENABLED=false`). Chạy dạng script trên máy của nhóm khi nhập dữ liệu, không phải
+Đây là công cụ nhập dữ liệu cho quản trị viên/Claude khi tự tìm địa điểm từ các trang nguồn, không nằm trong form
+công khai (người dùng chỉ điền form đơn giản). Mặc định tắt (`LOCATION_SUGGEST_ENABLED=false`). Chạy dạng script trên máy của nhóm khi nhập dữ liệu, không phải
 dịch vụ trong app: `scripts/suggest-location/` gồm chép lời (Whisper/PhoWhisper), OCR khung hình (ffmpeg +
 Tesseract/PaddleOCR), trích cụm vị trí, geocode, rồi ghi `location_suggestions`. Chỉ nhận file video do chủ trang
 cung cấp. Constitution check: nguyên tắc II (chỉ kiểm duyệt viên thấy, xoá video sau xử lý) và III (không tải từ
