@@ -173,4 +173,8 @@ xác minh" sau khi được duyệt.
 - (Phỏng đoán) Ban đầu nhóm dự án là kiểm duyệt viên; chưa cần hệ thống kiểm duyệt viên tình nguyện.
 - Không dùng "tài khoản Facebook tin cậy" để tự động đọc trang, vì vi phạm điều khoản Meta (hiến chương,
   nguyên tắc III). Danh sách trang Facebook Marshall gửi sau sẽ dùng làm dữ liệu khởi đầu qua nhập tay + nhúng link.
+- Ví dụ nguồn tham khảo do Marshall gửi (trang Facebook đăng reel kể về các hoàn cảnh):
+  https://www.facebook.com/tonhoasen.hsg/reels/ và https://www.facebook.com/chuyenmuusinh/reels/.
+  Reel từ các trang này là loại link người dùng sẽ gắn vào một địa điểm; mỗi reel cần được gắn với
+  một vị trí và danh mục bằng tay vì reel không có toạ độ.
 - Nhúng bài/reel Facebook phụ thuộc vào công cụ nhúng của Meta và việc bài đó còn công khai.
