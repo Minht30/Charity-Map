@@ -4,7 +4,7 @@
 
 **Created**: 2026-11-26
 
-**Status**: Draft (v2, cập nhật theo tổng quan của Marshall ngày 2026-11-26)
+**Status**: Draft (v3, 2026-11-26: chốt đăng nhập và nguồn Facebook, thêm danh mục bán vé số; xem [research.md](./research.md))
 
 **Input**: User description: "Một bản đồ giống Google Maps, bắt đầu ở TP.HCM và vùng lân cận. Mở bản
 đồ là thấy quanh mình có hoàn cảnh nào cần giúp và cần giúp gì: cụ già vẫn đi bán hàng, cửa hàng do
@@ -17,7 +17,7 @@ phải chuyện tiền, mà để người trẻ và những người có điề
 ### User Story 1 - Mở bản đồ, thấy hoàn cảnh cần giúp quanh mình (Priority: P1)
 
 Một bạn trẻ ở TP.HCM mở trang trên điện thoại, bản đồ căn vào vị trí của bạn và hiện các điểm cần
-giúp gần đó, mỗi điểm có biểu tượng theo danh mục. Bạn lọc "Cụ già bán hàng", bấm vào một điểm và
+giúp gần đó, mỗi điểm có biểu tượng theo danh mục. Bạn lọc "Người bán vé số", bấm vào một điểm và
 thấy: ai, đang bán gì hoặc cần gì, cách giúp (mua hàng, mang đồ ăn, ghé trò chuyện...), giờ thường
 có mặt, và bài/reel Facebook kể về hoàn cảnh này.
 
@@ -32,7 +32,7 @@ cách giúp cùng bài Facebook được nhúng.
 1. **Given** người dùng cho phép truy cập vị trí, **When** mở trang, **Then** bản đồ căn vào vị trí đó
    và hiện các điểm đã duyệt trong bán kính có thể điều chỉnh (mặc định 3 km).
 2. **Given** người dùng từ chối vị trí, **When** mở trang, **Then** bản đồ hiện trung tâm TP.HCM và cho
-   phép chọn quận/huyện.
+   phép chọn phường/xã (tìm được cả bằng tên quận cũ).
 3. **Given** bản đồ đang hiển thị, **When** chọn một hoặc nhiều danh mục, **Then** chỉ các điểm thuộc
    danh mục đó còn hiện.
 4. **Given** bấm vào một điểm, **When** mở chi tiết, **Then** thấy tiêu đề, mô tả, danh mục, các cách
@@ -119,8 +119,8 @@ xác minh" sau khi được duyệt.
 ### Functional Requirements
 
 - **FR-001**: Hệ thống PHẢI hiển thị bản đồ các điểm đã duyệt quanh vị trí người dùng, có gom cụm.
-- **FR-002**: Người dùng PHẢI lọc được theo danh mục và tìm theo khu vực (quận/huyện). Danh mục ban đầu:
-  cụ già/người lớn tuổi bán hàng, cửa hàng do người khuyết tật làm, người vô gia cư, điểm phát đồ ăn/quyên
+- **FR-002**: Người dùng PHẢI lọc được theo danh mục và tìm theo khu vực (phường/xã theo đơn vị hành
+  chính từ 01/07/2025, tìm được bằng tên quận cũ). Danh mục ban đầu: người bán vé số, cụ già/người lớn tuổi bán hàng, cửa hàng do người khuyết tật làm, người vô gia cư, điểm phát đồ ăn/quyên
   góp đồ, nhà có thể ghé thăm, khác. Quản trị viên quản lý được danh sách này.
 - **FR-003**: Mỗi điểm PHẢI có ít nhất một "cách giúp" ngoài tiền (mua hàng, mang đồ ăn, đồ dùng, ghé thăm
   trò chuyện, chia sẻ, góp công). Hệ thống KHÔNG nhận hay chuyển tiền.
@@ -135,11 +135,12 @@ xác minh" sau khi được duyệt.
 - **FR-009**: Bất kỳ ai cũng PHẢI báo cáo được một điểm; báo cáo "không đồng ý" PHẢI ẩn điểm ngay.
 - **FR-010**: Điểm không được xác nhận lại sau 90 ngày PHẢI có nhãn cảnh báo; sau 180 ngày PHẢI tự ẩn.
 - **FR-011**: Giao diện PHẢI tiếng Việt và dùng tốt trên điện thoại.
-- **FR-012**: Dữ liệu từ Facebook PHẢI lấy theo cách [NEEDS CLARIFICATION: (A) người dùng dán link, hệ thống
-  nhúng bài/reel công khai bằng công cụ nhúng chính thức của Meta — đề xuất cho MVP; hay (B) xin Meta duyệt quyền
-  Graph API để tự đọc bài từ một danh sách trang thiện nguyện; hay cả hai, B làm sau?]
-- **FR-013**: Cách đăng nhập cho người đăng là [NEEDS CLARIFICATION: đăng nhập bằng Facebook, Google, số điện
-  thoại (OTP), hay kết hợp?]
+- **FR-012**: Người đăng PHẢI gắn được link bài/reel Facebook công khai; hệ thống nhúng nội dung bằng công cụ
+  nhúng chính thức của Meta (oEmbed) và KHÔNG tải hay lưu video/nội dung bài. Tự động đọc bài từ các trang hợp
+  tác là giai đoạn sau (xem research.md mục 1).
+- **FR-013**: Người đăng PHẢI đăng nhập bằng Facebook hoặc Google.
+- **FR-014**: Hệ thống KHÔNG hiển thị số điện thoại, tài khoản ngân hàng hay kênh liên hệ trực tiếp của người
+  được giới thiệu. Chỉ có vị trí, cách giúp và link bài viết/reel kể về hoàn cảnh.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -164,6 +165,7 @@ xác minh" sau khi được duyệt.
 - **SC-004**: Báo cáo "không đồng ý" làm điểm biến mất khỏi bản đồ trong vòng 1 phút, 100% trường hợp.
 - **SC-005**: Bài cộng đồng được duyệt hoặc từ chối trong vòng 48 giờ.
 - **SC-006**: 0 điểm thuộc danh mục người vô gia cư hiển thị vị trí chính xác.
+- **SC-007**: 100% điểm hiển thị không chứa số điện thoại hay số tài khoản của người được giới thiệu.
 
 ## Assumptions
 

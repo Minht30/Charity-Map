@@ -13,7 +13,7 @@
 
 ## Requirement Completeness
 
-- [ ] No [NEEDS CLARIFICATION] markers remain
+- [x] No [NEEDS CLARIFICATION] markers remain
 - [x] Requirements are testable and unambiguous
 - [x] Success criteria are measurable
 - [x] Success criteria are technology-agnostic (no implementation details)
@@ -31,7 +31,5 @@
 
 ## Notes
 
-- Còn 2 điểm [NEEDS CLARIFICATION] (FR-012 cách lấy dữ liệu Facebook, FR-013 cách đăng nhập). Cần trả lời
-  trước `/speckit-plan`, có thể qua `/speckit-clarify`.
-- FR-012 nhắc tới "Meta Graph API" như một ràng buộc chính sách của nguồn dữ liệu, không phải lựa
-  chọn kỹ thuật.
+- 2026-11-26: Đã chốt FR-012 (dán link + nhúng oEmbed) và FR-013 (Facebook, Google). Còn cần thử oEmbed với
+  link reel thật trước `/speckit-plan`.

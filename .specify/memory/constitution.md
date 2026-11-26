@@ -1,6 +1,7 @@
 <!--
 Sync Impact Report
-- Version change: 0.1.0 → 0.2.0 (bản nháp; đổi trọng tâm từ "bản đồ tổ chức" sang "bản đồ hoàn cảnh cần giúp")
+- Version change: 0.2.0 → 0.3.0 (nguyên tắc II thêm quy tắc không hiển thị thông tin liên hệ; đăng nhập Facebook/Google)
+- Trước đó: 0.1.0 → 0.2.0 (đổi trọng tâm sang "bản đồ hoàn cảnh cần giúp")
 - Modified principles:
   - I. Dữ liệu chính xác và có nguồn gốc → I. Sự thật, có nguồn, được kiểm duyệt
   - III. Quyền riêng tư theo mặc định → II. Phẩm giá và sự đồng ý của người được giúp
@@ -10,7 +11,6 @@ Sync Impact Report
 - Added sections: Community Moderation
 - Follow-up TODOs:
   - TODO(RATIFICATION_DATE): đặt ngày khi Marshall phê duyệt.
-  - Cách tích hợp Facebook (oEmbed so với Graph API) chờ Marshall chọn.
 -->
 
 # Bản đồ thiện nguyện (Charity Map) Constitution
@@ -34,6 +34,7 @@ thể bị dùng để lừa đảo.
   PHẢI gỡ được bài trong một thao tác, không cần tài khoản.
 - Với người không có chỗ ở cố định, vị trí PHẢI hiển thị gần đúng (bán kính tối thiểu 200 m), không
   phải điểm chính xác. Với cửa hàng/quầy hàng cố định, có thể hiển thị đúng vị trí.
+- KHÔNG hiển thị số điện thoại, tài khoản ngân hàng hay kênh liên hệ trực tiếp của người được giới thiệu.
 - KHÔNG đăng số giấy tờ tùy thân, thông tin bệnh án, khuôn mặt trẻ em, hay địa chỉ nhà riêng chính xác.
 - Ngôn từ PHẢI tôn trọng, không giật gân hay khai thác sự khổ cực để câu tương tác.
 
@@ -82,8 +83,7 @@ lý do trong plan.
 
 ## Community Moderation
 
-- Ai cũng gửi được địa điểm, nhưng PHẢI đăng nhập (ví dụ bằng số điện thoại hoặc tài khoản mạng xã
-  hội) để chống spam; người xem bản đồ không cần đăng nhập.
+- Ai cũng gửi được địa điểm, nhưng PHẢI đăng nhập bằng Facebook hoặc Google để chống spam; người xem bản đồ không cần đăng nhập.
 - Bài mới vào hàng chờ; người kiểm duyệt kiểm tra sự đồng ý, vị trí, ngôn từ và nguồn trước khi duyệt.
 - Người xem PHẢI báo cáo được bài (sai thông tin, nghi lừa đảo, người này không đồng ý, đã không còn ở đây).
   Bài bị báo cáo "không đồng ý" PHẢI ẩn ngay, trước khi xem xét.
@@ -103,4 +103,4 @@ lý do và tăng phiên bản theo semver: MAJOR khi bỏ hoặc định nghĩa 
 nguyên tắc/mục, PATCH khi sửa câu chữ. Trước 1.0.0 (chưa phê duyệt), thay đổi lớn chỉ tăng MINOR.
 Mỗi review PR PHẢI kiểm tra sự tuân thủ; ngoại lệ PHẢI được ghi lý do trong plan.
 
-**Version**: 0.2.0 | **Ratified**: TODO(RATIFICATION_DATE): đặt khi Marshall phê duyệt | **Last Amended**: 2026-11-26
+**Version**: 0.3.0 | **Ratified**: TODO(RATIFICATION_DATE): đặt khi Marshall phê duyệt | **Last Amended**: 2026-11-26
