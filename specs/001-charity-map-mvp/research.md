@@ -125,9 +125,9 @@ cuối (hiến chương, nguyên tắc I).
 
 ### Cách tiết kiệm token
 
-1. **Model nhỏ cho việc nhỏ**: phân loại và trích xuất là việc đơn giản. Thử trước với model rẻ nhất của
-   Claude (Haiku 5.5, khoảng $0.10 / 1 triệu token đầu vào). Mỗi bài tốn vài trăm token, nghĩa là hàng
-   nghìn bài chỉ tốn vài xu. Chỉ dùng model lớn hơn nếu bộ test (eval) cho thấy model nhỏ sai nhiều.
+1. **Chọn model theo bộ test**: mặc định dùng Claude Opus 5.5 ở mức effort thấp (`low`). Model nhỏ nhất
+   (Haiku 5.5, khoảng $0.10 / 1 triệu token đầu vào, rẻ hơn khoảng 40 lần) có thể đủ cho phân loại và trích
+   xuất; chạy cả hai trên bộ test (mục 7) rồi Marshall chọn.
 2. **Structured outputs**: bắt model trả đúng JSON schema, không phải gọi lại vì sai định dạng.
 3. **Prompt caching**: phần hướng dẫn cố định (danh mục, quy tắc ngôn từ, ví dụ) đặt đầu prompt và cache
    lại. Lần gọi sau chỉ trả giá rẻ cho phần đó.
@@ -137,8 +137,8 @@ cuối (hiến chương, nguyên tắc I).
 6. **Luật đơn giản trước, AI sau**: số điện thoại, số CCCD bắt bằng regex trước; chỉ gửi AI phần cần hiểu ngữ nghĩa.
 7. **Bộ test nhỏ**: 50–100 caption thật đã gán nhãn tay để đo độ chính xác trước khi bật cho người dùng.
 
-Chi phí ước tính *(phỏng đoán)*: 10.000 bài × ~800 token/bài ≈ 8 triệu token ≈ dưới $5 với model nhỏ,
-chưa tính giảm giá cache/batch.
+Chi phí ước tính *(phỏng đoán)*: 10.000 bài × ~800 token/bài ≈ 8 triệu token ≈ khoảng $1 với Haiku 5.5, hoặc
+khoảng $40–60 với Opus 5.5 ở effort thấp, chưa tính giảm giá cache/batch.
 
 ---
 
