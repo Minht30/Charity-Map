@@ -119,7 +119,21 @@ test end-to-end cho các luồng chính.
 
 ---
 
-## Phase 8: Polish
+## Phase 8: User Story 5 — Gợi ý vị trí từ video (P3, tuỳ chọn, mặc định tắt)
+
+**Goal**: từ file video chủ trang cung cấp, gợi ý ghim kèm bằng chứng cho kiểm duyệt viên.
+Bỏ cả phase này thì MVP vẫn chạy đầy đủ.
+
+- [ ] T052 [US5] Bảng `location_suggestions` theo data-model.md (`location_suggestions.evidence_text`, `location_suggestions.video_source`) và RLS chỉ cho kiểm duyệt viên, trong `supabase/migrations/0009_location_suggestions.sql`
+- [ ] T053 [P] [US5] Chép lời tiếng Việt bằng Whisper/PhoWhisper trong `scripts/suggest-location/transcribe.py`; thử 10 video thật, ghi độ chính xác vào research.md
+- [ ] T054 [P] [US5] Lấy khung hình (ffmpeg, 1 khung/2–3 giây) và OCR tiếng Việt trong `scripts/suggest-location/ocr.py`
+- [ ] T055 [US5] Trích cụm vị trí từ caption + bản chép lời + OCR, xuất JSON có bằng chứng, trong `scripts/suggest-location/extract.py` (bản đầu dùng phiên làm việc với Claude, không gọi API)
+- [ ] T056 [US5] Geocode cụm vị trí và giao lộ, giới hạn trong TP.HCM, ghi tối đa 3 gợi ý, trong `scripts/suggest-location/geocode.ts`; xoá file video và bản chép lời sau khi xong
+- [ ] T057 [US5] Hiện gợi ý + bằng chứng trong hàng chờ kiểm duyệt, nút chấp nhận/kéo ghim, trong `components/moderation/LocationSuggestions.tsx`
+
+---
+
+## Phase 9: Polish
 
 - [ ] T049 [P] *(Tuỳ chọn, Marshall quyết định sau; MVP chạy đầy đủ khi bỏ task này)* AI gợi ý điền form sau cờ `AI_SUGGEST_ENABLED` (mặc định tắt) theo contracts/ai-extract.md, trong `lib/ai/suggest.ts` và `app/api/ai/suggest/route.ts`
 - [ ] T050 [P] Ghi công © OpenStreetMap, trang "Về dự án" và chính sách quyền riêng tư tiếng Việt trong `app/(public)/gioi-thieu/page.tsx`
@@ -130,7 +144,7 @@ test end-to-end cho các luồng chính.
 ## Dependencies & Execution Order
 
 - Phase 1 → Phase 2 → các user story.
-- US1 không phụ thuộc story khác. US2 và US3 dùng bản đồ và trang chi tiết của US1. US4 sau US2.
+- US1 không phụ thuộc story khác. US2 và US3 dùng bản đồ và trang chi tiết của US1. US4 sau US2. US5 (tuỳ chọn) sau US2 và Phase 6.
 - Phase 6 cần T046 sau T031; T045 làm song song được ngay từ đầu.
 - Phát hành công khai cần US1 + US2 + US3 (hiến chương nguyên tắc II).
 

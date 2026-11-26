@@ -79,6 +79,13 @@ cũ để tìm kiếm), `geom` geography(MultiPolygon).
 `id`, `place_id` (null trước khi gửi), `input_hash` (sha256 của đầu vào), `model`, `output` jsonb,
 `input_tokens`, `output_tokens`, `created_at`. Cùng `input_hash` thì dùng lại, không gọi AI lần nữa.
 
+### `location_suggestions` *(chỉ khi bật FR-015)*
+
+`id`, `place_id`, `rank` 1–3, `point` geography(Point), `confidence` 0–1, `evidence_text` (≤ 300 ký tự, câu
+nói hoặc chữ trên hình), `evidence_kind` enum `speech` \| `ocr` \| `caption`, `video_source` enum
+`owner_upload` \| `owner_permission`, `status` enum `suggested` \| `accepted` \| `rejected`, `created_at`.
+Chỉ kiểm duyệt viên đọc được. Không lưu file video hay bản chép lời đầy đủ.
+
 ## Quy tắc trạng thái
 
 ```

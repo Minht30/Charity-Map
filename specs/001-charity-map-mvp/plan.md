@@ -119,6 +119,14 @@ public/
 bảo mật nằm trong `supabase/migrations`. Đây là cấu trúc đơn giản nhất mà vẫn đặt các quy tắc quyền riêng tư
 ở tầng database, nơi lỗi giao diện không vượt qua được.
 
+## Optional: gợi ý vị trí từ video (FR-015, US5)
+
+Mặc định tắt (`LOCATION_SUGGEST_ENABLED=false`). Chạy dạng script trên máy của nhóm khi nhập dữ liệu, không phải
+dịch vụ trong app: `scripts/suggest-location/` gồm chép lời (Whisper/PhoWhisper), OCR khung hình (ffmpeg +
+Tesseract/PaddleOCR), trích cụm vị trí, geocode, rồi ghi `location_suggestions`. Chỉ nhận file video do chủ trang
+cung cấp. Constitution check: nguyên tắc II (chỉ kiểm duyệt viên thấy, xoá video sau xử lý) và III (không tải từ
+Facebook) đều ĐẠT; nguyên tắc VII ĐẠT vì không thêm dịch vụ chạy thường trực. Chi tiết ở research.md mục 5.
+
 ## Risks & Open Items
 
 | Mục | Ảnh hưởng | Cách xử lý |

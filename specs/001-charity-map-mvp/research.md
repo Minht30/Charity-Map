@@ -157,7 +157,38 @@ khoảng $40–60 với Opus 5.5 ở effort thấp, chưa tính giảm giá cach
 
 ---
 
-## 5. Ảnh hưởng tới spec
+## 5. Gợi ý vị trí từ nội dung video (tuỳ chọn, mặc định tắt)
+
+**Vấn đề** (Marshall, 2026-11-26): vị trí thường chỉ có trong lời nói hoặc trên hình ("ở ngã tư A và B"),
+không có trong caption. Claude trong phiên làm việc đọc được chữ và xem được ảnh chụp màn hình, nhưng **không
+nghe được âm thanh** của video, nên cần một bước chuyển lời nói thành chữ trước.
+
+**Nguồn video hợp lệ**: chỉ file do chủ trang gửi (ví dụ Tôn Hoa Sen gửi file gốc, hoặc thư mục chia sẻ), hoặc
+khi chủ trang cho phép bằng văn bản. KHÔNG dùng công cụ tải video từ Facebook (vi phạm điều khoản Meta, hiến
+chương nguyên tắc III).
+
+**Quy trình**
+
+1. **Lời nói → chữ**: Whisper (mã nguồn mở, chạy miễn phí trên máy) hoặc bản tinh chỉnh cho tiếng Việt như
+   PhoWhisper của VinAI. *Chưa kiểm chứng*: độ chính xác với giọng miền Nam và tiếng ồn đường phố; cần thử với 10
+   video thật.
+2. **Chữ trên hình**: lấy 1 khung hình mỗi 2–3 giây, đọc chữ bằng OCR hỗ trợ tiếng Việt (Tesseract `vie`,
+   PaddleOCR hoặc VietOCR) để bắt biển tên đường, biển cửa hàng, số nhà.
+3. **Trích địa điểm**: một bước đọc hiểu (Claude trong phiên làm việc khi nhập dữ liệu khởi đầu, hoặc Claude API
+   nếu sau này bật) đọc caption + bản chép lời + chữ OCR, trả về các cụm vị trí như "ngã tư Lê Lợi – Pasteur",
+   "chợ Bà Chiểu", kèm câu gốc làm bằng chứng.
+4. **Ra toạ độ**: geocoder (VietMap/Goong, mục 3) đổi cụm vị trí thành toạ độ; giao lộ thì tìm điểm cắt của hai
+   con đường. Giới hạn trong ranh giới TP.HCM mới.
+5. **Người xác nhận**: kiểm duyệt viên thấy tối đa 3 ghim gợi ý + bằng chứng, chọn một hoặc ghim tay.
+
+**Chi phí**: bước 1, 2, 4 chạy miễn phí trên máy (trừ phí geocoder nếu vượt hạn mức miễn phí); bước 3 làm trong
+phiên làm việc với Claude thì không tốn thêm. Không cần máy chủ riêng ở MVP: chạy bằng script trên máy của nhóm
+khi nhập dữ liệu (`scripts/suggest-location/`).
+
+**Quyền riêng tư**: xoá file video và bản chép lời đầy đủ sau khi xử lý; chỉ lưu đoạn bằng chứng ngắn. Bản chép
+lời cũng chạy qua bộ lọc số điện thoại/CCCD.
+
+## 6. Ảnh hưởng tới spec
 
 - FR-012 (nguồn Facebook): **đã chốt** dán link + nhúng oEmbed cho MVP; liên hệ trang hợp tác ở giai đoạn 2.
 - FR-013 (đăng nhập): **đã chốt** Facebook và Google.

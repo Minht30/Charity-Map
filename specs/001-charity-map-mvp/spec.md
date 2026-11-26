@@ -105,6 +105,29 @@ xác minh" sau khi được duyệt.
 
 ---
 
+### User Story 5 - Gợi ý vị trí từ nội dung video (Priority: P3, tuỳ chọn, mặc định tắt)
+
+Trong reel, vị trí thường chỉ được nói ra ("cô ngồi ở góc đường A và B") hoặc hiện trên biển hiệu, không có
+trong caption. Khi một trang hợp tác (ví dụ Tôn Hoa Sen) gửi file video gốc hoặc cho phép dùng video của họ,
+hệ thống chuyển lời nói thành chữ, đọc chữ trên vài khung hình (biển tên đường, biển cửa hàng), rồi gợi ý một
+vị trí trên bản đồ. Kiểm duyệt viên xác nhận hoặc sửa ghim trước khi điểm được duyệt.
+
+**Why this priority**: Giảm phần việc khó nhất (tìm vị trí) khi nhập nhiều reel, nhưng MVP vẫn chạy đầy đủ với
+ghim tay.
+
+**Independent Test**: Tải lên một video mẫu có câu nói về một ngã tư ở TP.HCM, thấy gợi ý ghim gần ngã tư đó
+kèm đoạn chữ làm bằng chứng; kiểm duyệt viên chấp nhận hoặc kéo ghim đi chỗ khác.
+
+**Acceptance Scenarios**:
+
+1. **Given** tính năng bật và có video do trang hợp tác cung cấp, **When** chạy gợi ý, **Then** hiện tối đa 3
+   vị trí gợi ý, mỗi cái kèm đoạn lời nói hoặc chữ trên hình làm căn cứ và mức độ tin cậy.
+2. **Given** gợi ý có độ tin cậy thấp hoặc không tìm thấy, **When** hiển thị, **Then** kiểm duyệt viên ghim tay
+   như bình thường.
+3. **Given** tính năng tắt, **When** nhập reel, **Then** mọi thứ hoạt động như cũ, không có bước gợi ý.
+
+---
+
 ### Edge Cases
 
 - Người bán hàng rong di chuyển theo giờ: cho phép nhiều khung giờ/vị trí hoặc chỉ một vùng hoạt động.
@@ -141,6 +164,10 @@ xác minh" sau khi được duyệt.
 - **FR-013**: Người đăng PHẢI đăng nhập bằng Facebook hoặc Google.
 - **FR-014**: Hệ thống KHÔNG hiển thị số điện thoại, tài khoản ngân hàng hay kênh liên hệ trực tiếp của người
   được giới thiệu. Chỉ có vị trí, cách giúp và link bài viết/reel kể về hoàn cảnh.
+- **FR-015** *(tuỳ chọn, mặc định tắt)*: Hệ thống CÓ THỂ gợi ý vị trí từ lời nói và chữ trên hình trong video,
+  CHỈ với file video do chủ trang cung cấp hoặc cho phép. KHÔNG tự tải video từ Facebook. Gợi ý chỉ hiện cho
+  kiểm duyệt viên, không bao giờ tự duyệt; file video và bản chép lời bị xoá sau khi xử lý xong, chỉ giữ đoạn
+  chữ làm căn cứ.
 
 ### Key Entities *(include if feature involves data)*
 
