@@ -22,7 +22,7 @@ chạy bộ test (quyết định của Marshall).
   "additionalProperties": false,
   "required": ["category", "help_types", "title", "location_type", "flags"],
   "properties": {
-    "category": { "enum": ["ban-ve-so", "cu-gia-ban-hang", "nguoi-khuyet-tat", "vo-gia-cu",
+    "category": { "enum": ["ban-ve-so", "cu-gia-ban-hang", "can-ho-tro-dac-biet", "vo-gia-cu",
                            "diem-phat-do-an", "ghe-tham", "khac"] },
     "help_types": { "type": "array", "items": { "enum": ["buy_goods", "bring_food", "bring_items",
                     "visit_chat", "share", "volunteer"] } },

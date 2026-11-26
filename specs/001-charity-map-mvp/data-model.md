@@ -46,8 +46,8 @@ quần áo), `visit_chat` (ghé thăm trò chuyện), `share` (chia sẻ thông 
 ### `categories`
 
 `id`, `slug`, `name_vi`, `icon`, `sort_order`, `forces_roaming` boolean.
-Seed: `ban-ve-so` Người bán vé số · `cu-gia-ban-hang` Cụ già bán hàng · `nguoi-khuyet-tat` Cửa hàng do người
-khuyết tật làm · `vo-gia-cu` Người vô gia cư (`forces_roaming`) · `diem-phat-do-an` Điểm phát đồ ăn / quyên góp
+Seed: `ban-ve-so` Người bán vé số · `cu-gia-ban-hang` Cụ già bán hàng · `can-ho-tro-dac-biet` Cần hỗ trợ đặc biệt
+(vd: cửa hàng do người khuyết tật làm; tên cũ "Người khuyết tật" bỏ vì nghe thiếu tế nhị) · `vo-gia-cu` Người vô gia cư (`forces_roaming`) · `diem-phat-do-an` Điểm phát đồ ăn / quyên góp
 đồ · `ghe-tham` Nhà có thể ghé thăm · `khac` Khác.
 
 ### `admin_units`

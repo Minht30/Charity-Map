@@ -16,14 +16,22 @@ test end-to-end cho các luồng chính.
 
 ---
 
+## Tiến độ
+
+**Mốc 1 (2026-11-26)**: bản đồ chạy với 30 điểm mẫu, lọc theo danh mục, thẻ chi tiết, mở được trên điện thoại.
+Chưa nối Supabase: `lib/db/places.ts` đọc dữ liệu mẫu và làm mờ vị trí bằng `lib/privacy/fuzz.ts` (giống trigger
+T009 sẽ làm ở database). Tiếp theo: Supabase (T004, T007–T015), PMTiles (T018), oEmbed (T022), e2e (T027–T028).
+
+---
+
 ## Phase 1: Setup
 
-- [ ] T001 Khởi tạo project Next.js (App Router, TypeScript, pnpm) ở thư mục gốc theo cấu trúc trong plan.md
-- [ ] T002 [P] Cấu hình ESLint, Prettier, `tsconfig.json` strict
-- [ ] T003 [P] Cài Vitest và Playwright, thêm script `test`, `test:e2e` vào `package.json`
+- [x] T001 Khởi tạo project Next.js (App Router, TypeScript, pnpm) ở thư mục gốc theo cấu trúc trong plan.md (dùng npm vì máy chưa có pnpm)
+- [ ] T002 [P] Cấu hình ESLint, Prettier, `tsconfig.json` strict — *đã bật `strict`; ESLint/Prettier chưa*
+- [ ] T003 [P] Cài Vitest và Playwright, thêm script `test`, `test:e2e` vào `package.json` — *đã có Vitest; Playwright e2e chưa*
 - [ ] T004 [P] Khởi tạo Supabase CLI (`supabase/config.toml`), bật extension `postgis`, `pg_trgm` trong `supabase/migrations/0001_extensions.sql`
-- [ ] T005 [P] Tạo `.env.example` (Supabase, Facebook App ID, Google OAuth, `AI_SUGGEST_ENABLED=false`, khoá VietMap/Goong)
-- [ ] T006 [P] Thêm `public/manifest.webmanifest` và icon PWA; đặt ngôn ngữ mặc định `vi` trong `app/layout.tsx`
+- [x] T005 [P] Tạo `.env.example` (Supabase, Facebook App ID, Google OAuth, `AI_SUGGEST_ENABLED=false`, khoá VietMap/Goong)
+- [x] T006 [P] Thêm `public/manifest.webmanifest` và icon PWA; đặt ngôn ngữ mặc định `vi` trong `app/layout.tsx`
 
 ---
 
@@ -38,8 +46,8 @@ test end-to-end cho các luồng chính.
 - [ ] T013 [P] Seed danh mục (7 danh mục, gồm `ban-ve-so`) trong `supabase/seed/categories.sql`
 - [ ] T014 [P] Tìm và nạp ranh giới 168 phường/xã TP.HCM kèm tên quận cũ vào `supabase/seed/admin_units.sql`; nếu chưa có dữ liệu mở, ghi lại nguồn còn thiếu và để `ward_code` null
 - [ ] T015 [P] Supabase client cho server và browser trong `lib/db/client.ts`
-- [ ] T016 [P] Regex phát hiện số điện thoại Việt Nam, số CCCD, số tài khoản trong `lib/privacy/detect.ts`, kèm test `tests/unit/privacy-detect.test.ts`
-- [ ] T017 [P] Định dạng lỗi chung và Zod helpers trong `lib/api/errors.ts`
+- [x] T016 [P] Regex phát hiện số điện thoại Việt Nam, số CCCD, số tài khoản trong `lib/privacy/detect.ts`, kèm test `tests/unit/privacy-detect.test.ts`
+- [x] T017 [P] Định dạng lỗi chung và Zod helpers trong `lib/api/errors.ts`
 
 **Checkpoint**: database, quyền truy cập và quy tắc quyền riêng tư chạy được và có test.
 
@@ -52,14 +60,14 @@ test end-to-end cho các luồng chính.
 **Independent Test**: nạp 30 điểm mẫu, làm theo quickstart.md mục US1.
 
 - [ ] T018 [P] [US1] Tạo file bản đồ nền PMTiles cho TP.HCM mới bằng Protomaps CLI, ghi lệnh vào `scripts/build-basemap.sh`
-- [ ] T019 [P] [US1] Dữ liệu mẫu 30 điểm ở TP.HCM trong `supabase/seed/demo_places.sql` (chỉ cho môi trường dev)
-- [ ] T020 [US1] `GET /api/places` (bbox, danh mục, phường) trả GeoJSON từ `places_public` trong `app/api/places/route.ts` theo contracts/api.md
-- [ ] T021 [US1] `GET /api/places/[id]` trong `app/api/places/[id]/route.ts`, không trả trường liên hệ nào (FR-014)
+- [x] T019 [P] [US1] Dữ liệu mẫu 30 điểm ở TP.HCM trong `supabase/seed/demo_places.sql` (chỉ cho môi trường dev) (bản đầu là `lib/db/demo-places.ts`, chưa phải SQL vì chưa nối Supabase)
+- [x] T020 [US1] `GET /api/places` (bbox, danh mục, phường) trả GeoJSON từ `places_public` trong `app/api/places/route.ts` theo contracts/api.md (đọc dữ liệu mẫu; nối `places_public` khi có Supabase)
+- [x] T021 [US1] `GET /api/places/[id]` trong `app/api/places/[id]/route.ts`, không trả trường liên hệ nào (FR-014)
 - [ ] T022 [P] [US1] Lấy và cache mã nhúng oEmbed (`source_links.embed_html`, làm mới sau 7 ngày) trong `lib/facebook/oembed.ts`
-- [ ] T023 [US1] Component bản đồ MapLibre + PMTiles, gom cụm, nút "vị trí của tôi", mặc định trung tâm TP.HCM khi bị từ chối vị trí, trong `components/map/MapView.tsx`
-- [ ] T024 [P] [US1] Bộ lọc danh mục và chọn phường/xã (tìm bằng tên quận cũ) trong `components/map/Filters.tsx`
-- [ ] T025 [US1] Trang chi tiết: cách giúp, giờ có mặt, reel nhúng, nhãn "vị trí gần đúng", nhãn "có thể đã thay đổi", nút chỉ đường mở Google/Apple Maps, trong `app/(public)/p/[id]/page.tsx` và `components/place/PlaceDetail.tsx`
-- [ ] T026 [US1] Trang bản đồ chính ghép T023–T025 trong `app/(public)/page.tsx`
+- [x] T023 [US1] Component bản đồ MapLibre + PMTiles, gom cụm, nút "vị trí của tôi", mặc định trung tâm TP.HCM khi bị từ chối vị trí, trong `components/map/MapView.tsx` (bản đồ nền tạm OpenFreeMap cho tới T018)
+- [ ] T024 [P] [US1] Bộ lọc danh mục và chọn phường/xã (tìm bằng tên quận cũ) trong `components/map/Filters.tsx` — *đã có lọc danh mục; chọn phường/xã chưa (chờ T014)*
+- [ ] T025 [US1] Trang chi tiết: cách giúp, giờ có mặt, reel nhúng, nhãn "vị trí gần đúng", nhãn "có thể đã thay đổi", nút chỉ đường mở Google/Apple Maps, trong `app/(public)/p/[id]/page.tsx` và `components/place/PlaceDetail.tsx` — *đã có trang chi tiết, nhãn, chỉ đường; nhúng reel chờ T022*
+- [x] T026 [US1] Trang bản đồ chính ghép T023–T025 trong `app/(public)/page.tsx`
 - [ ] T027 [P] [US1] Test e2e: mở bản đồ, lọc "Người bán vé số", mở chi tiết, thấy reel, trong `tests/e2e/view-map.spec.ts`
 - [ ] T028 [P] [US1] Test e2e đo thời gian hiện điểm < 3 giây trên mạng giả lập 4G trong `tests/e2e/performance.spec.ts`
 

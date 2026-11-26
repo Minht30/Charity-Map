@@ -154,7 +154,7 @@ kèm đoạn chữ làm bằng chứng; kiểm duyệt viên chấp nhận hoặ
 
 - **FR-001**: Hệ thống PHẢI hiển thị bản đồ các điểm đã duyệt quanh vị trí người dùng, có gom cụm.
 - **FR-002**: Người dùng PHẢI lọc được theo danh mục và tìm theo khu vực (phường/xã theo đơn vị hành
-  chính từ 01/07/2025, tìm được bằng tên quận cũ). Danh mục ban đầu: người bán vé số, cụ già/người lớn tuổi bán hàng, cửa hàng do người khuyết tật làm, người vô gia cư, điểm phát đồ ăn/quyên
+  chính từ 01/07/2025, tìm được bằng tên quận cũ). Danh mục ban đầu: người bán vé số, cụ già/người lớn tuổi bán hàng, cần hỗ trợ đặc biệt (vd: cửa hàng do người khuyết tật làm), người vô gia cư, điểm phát đồ ăn/quyên
   góp đồ, nhà có thể ghé thăm, khác. Quản trị viên quản lý được danh sách này.
 - **FR-003**: Mỗi điểm PHẢI có ít nhất một "cách giúp" ngoài tiền (mua hàng, mang đồ ăn, đồ dùng, ghé thăm
   trò chuyện, chia sẻ, góp công). Hệ thống KHÔNG nhận hay chuyển tiền.
