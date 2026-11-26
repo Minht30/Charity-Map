@@ -40,7 +40,7 @@ Body: `{ "type": "no_consent" | "wrong_info" | "scam" | "gone", "note"?: string 
 Body: `{ "url": "https://www.facebook.com/..." }`. Gọi oEmbed công khai của Meta.
 200: `{ ok: true, kind, embed_html }` hoặc `{ ok: false, reason: "not_public" | "unsupported" | "not_found" }`.
 
-### `POST /api/ai/suggest`
+### `POST /api/ai/suggest`  *(chỉ khi `AI_SUGGEST_ENABLED=true`; MVP trả 404)*
 
 Body: `{ "text": string (≤ 2.000 ký tự) }`. Xem [ai-extract.md](./ai-extract.md).
 200: gợi ý để người dùng xác nhận, không lưu vào `places`. Giới hạn 20 lần/ngày/người.

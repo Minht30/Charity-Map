@@ -1,5 +1,9 @@
 # AI Contract: gợi ý điền form và cờ kiểm duyệt
 
+> **MVP**: tắt trong app (`AI_SUGGEST_ENABLED=false`). Schema đầu ra bên dưới vẫn là định dạng của file
+> `supabase/seed/places.draft.json` mà phiên làm việc với Claude soạn khi nhập dữ liệu khởi đầu (mỗi phần tử
+> thêm `source_url` và `pin_hint`).
+
 Dùng Claude qua `@anthropic-ai/sdk`, structured outputs (`output_config.format` với JSON schema bên dưới).
 Mặc định model `claude-opus-5-5`, `output_config.effort: "low"`; có thể đổi sang `claude-haiku-5-5` sau khi
 chạy bộ test (quyết định của Marshall).

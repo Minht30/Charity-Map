@@ -24,8 +24,10 @@ Nguồn: [bài blog của Meta về oEmbed không cần token (15/06/2026)](http
 [Meta oEmbed Read](https://developers.facebook.com/docs/features-reference/meta-oembed-read),
 [Page Public Content Access](https://developers.facebook.com/docs/features-reference/page-public-content-access).
 Lưu ý: trang tài liệu oEmbed Read vẫn ghi "cần App Review"; bài blog mới hơn nói không cần nữa với
-nội dung công khai. *Chưa kiểm chứng*: link dạng `/reel/...` có chạy qua endpoint oEmbed Video hay
-không; blog chỉ nói "posts" và "videos". Cần thử với link reel thật của Tổ Hoa Sen trước khi plan.
+nội dung công khai. **Đã kiểm chứng ngày 2026-11-26**: gọi `https://graph.facebook.com/oembed_video?url=`
+với một reel công khai của Tôn Hoa Sen (`facebook.com/reel/1639694723761056/`), không token, không đăng nhập,
+trả về `type: "video"` và mã nhúng `<div class="fb-video" data-href="…/reel/…">` dùng Facebook JS SDK v27.0.
+Trang reels của Tôn Hoa Sen cũng xem được công khai không cần đăng nhập.
 
 ### Quyết định
 
@@ -123,7 +125,20 @@ kiểm soát chi phí khi nhiều người dùng), Leaflet (đơn giản nhưng 
 AI **không** xem video, **không** tự đăng, **không** quyết định duyệt. Người kiểm duyệt luôn quyết định
 cuối (hiến chương, nguyên tắc I).
 
-### Cách tiết kiệm token
+### Giai đoạn MVP: chưa gọi Claude API trong app (Marshall, 2026-11-26)
+
+Marshall muốn chưa trả tiền API. Gói Claude Pro chỉ dùng được trong ứng dụng Claude (như phiên làm việc này),
+không dùng được để chạy tính năng AI bên trong một web app đã triển khai; app cần khoá API riêng, tính tiền riêng.
+Vì vậy MVP:
+
+- **Không có AI trong app.** Form thêm địa điểm điền tay, có danh sách chọn sẵn; regex chặn số điện thoại/CCCD
+  vẫn chạy (không tốn gì). Mã gọi AI để sẵn sau một cờ bật/tắt (`AI_SUGGEST_ENABLED=false`), bật khi có khoá API.
+- **Nhập dữ liệu khởi đầu qua phiên làm việc với Claude.** Nhóm dự án (hoặc Claude trong một phiên như thế này)
+  mở các trang reel công khai, đọc caption, soạn file `supabase/seed/places.draft.json` theo đúng schema ở
+  `contracts/ai-extract.md`. Script `scripts/import-seed.ts` chỉ đọc file này và đưa vào hàng chờ duyệt, không gọi API.
+  Người kiểm duyệt vẫn ghim lại vị trí và duyệt từng điểm.
+
+### Cách tiết kiệm token (khi bật AI trong app)
 
 1. **Chọn model theo bộ test**: mặc định dùng Claude Opus 5.5 ở mức effort thấp (`low`). Model nhỏ nhất
    (Haiku 5.5, khoảng $0.10 / 1 triệu token đầu vào, rẻ hơn khoảng 40 lần) có thể đủ cho phân loại và trích

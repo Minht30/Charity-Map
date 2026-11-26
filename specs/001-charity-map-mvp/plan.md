@@ -18,7 +18,7 @@ duyệt viên. Chi tiết lựa chọn công nghệ ở [research.md](./research
 
 **Primary Dependencies**: Next.js (App Router, một project cho cả giao diện và API), MapLibre GL JS +
 `pmtiles`, Supabase (PostgreSQL + PostGIS, Auth với Facebook và Google, Row Level Security),
-`@anthropic-ai/sdk` cho phần AI, Zod để kiểm tra dữ liệu vào/ra
+`@anthropic-ai/sdk` (chỉ khi bật AI, xem dưới), Zod để kiểm tra dữ liệu vào/ra
 
 **Storage**: PostgreSQL 16 + PostGIS + `pg_trgm` (Supabase); bản đồ nền là một file PMTiles trên dịch vụ
 lưu file tĩnh (Supabase Storage hoặc Cloudflare R2)
@@ -38,9 +38,10 @@ người xem; không lưu số điện thoại/số tài khoản của người 
 
 **Scale/Scope**: giai đoạn đầu 200–5.000 điểm, vài nghìn người xem/ngày; thiết kế chịu được 100.000 điểm
 
-**AI model**: mặc định `claude-opus-5-5` ở effort `low`, prompt cố định được cache, Batch API cho lần nhập
-hàng loạt. Model nhỏ hơn (`claude-haiku-5-5`, rẻ hơn khoảng 40 lần) là lựa chọn của Marshall sau khi chạy bộ
-test 50–100 caption (research.md mục 4).
+**AI**: MVP **không gọi Claude API** (Marshall chưa muốn trả phí API; gói Pro không dùng cho app được). Gợi ý
+AI nằm sau cờ `AI_SUGGEST_ENABLED`, mặc định tắt. Dữ liệu khởi đầu do phiên làm việc với Claude soạn thành
+`supabase/seed/places.draft.json`, rồi `scripts/import-seed.ts` nạp vào hàng chờ duyệt. Khi bật AI: mặc định
+`claude-opus-5-5` effort `low`, prompt cache, Batch API; đổi model là quyết định của Marshall (research.md mục 4).
 
 ## Constitution Check
 
@@ -89,7 +90,7 @@ app/
     ├── places/[id]/reports/route.ts
     ├── places/[id]/confirm/route.ts
     ├── oembed/route.ts
-    ├── ai/suggest/route.ts
+    ├── ai/suggest/route.ts      # chỉ chạy khi AI_SUGGEST_ENABLED=true
     └── moderation/[id]/route.ts
 components/
 ├── map/                         # MapLibre, gom cụm, nút vị trí
@@ -106,7 +107,7 @@ supabase/
 ├── seed/                        # Danh mục, 168 phường/xã TP.HCM
 └── tests/                       # Test SQL
 scripts/
-└── import-seed.ts               # Nhập dữ liệu khởi đầu (dùng Batch API)
+└── import-seed.ts               # Nạp places.draft.json vào hàng chờ duyệt (không gọi API)
 tests/
 ├── unit/
 └── e2e/
@@ -122,7 +123,7 @@ bảo mật nằm trong `supabase/migrations`. Đây là cấu trúc đơn giả
 
 | Mục | Ảnh hưởng | Cách xử lý |
 |---|---|---|
-| oEmbed có nhận link `/reel/...` không | FR-004, FR-012 | Task đầu tiên: thử với 5 reel thật của Tổ Hoa Sen và Chuyện mưu sinh; nếu không được, hiện ảnh xem trước + link mở Facebook |
+| oEmbed với link `/reel/...` | FR-004, FR-012 | **Đã thử, chạy được** (2026-11-26, research.md mục 1). Vẫn giữ phương án dự phòng: link mở Facebook khi bài bị xoá/riêng tư |
 | Chọn VietMap hay Goong | Ô tìm địa chỉ | So sánh giá, hạn mức miễn phí, độ chính xác với 20 địa chỉ mẫu; ghim tay vẫn là cách chính |
 | Ranh giới 168 phường/xã mới | Lọc theo khu vực | Tìm bộ dữ liệu ranh giới mở (OSM hoặc nguồn nhà nước); nếu chưa có, lọc theo bán kính trước |
 | Facebook Login cần app Meta | FR-013 | Tạo app Meta chỉ với quyền đăng nhập cơ bản (`public_profile`, `email`), không xin quyền đọc trang |
